@@ -1,5 +1,9 @@
 import tkinter as tk
 
+# janelinha = tk.Tk()
+# janelinha.title("Jogo de Texto")
+# janelinha.mainloop()
+
 def processar_escolha():
     escolha = entrada.get()
     if escolha == "abrir porta":

@@ -11,7 +11,6 @@ pygame.init()
 
 # Cor de fundo
 cor_fundo = (0, 0, 0) 
- 
 
 # Função principal
 def main():
@@ -27,14 +26,12 @@ def main():
                 sys.exit()
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN:
-                    historico.append(entrada_usuario)
-                    # offset = min(len(historico) * altura + 50 - altura + 60, offset + 0)
+                    if entrada_usuario == 'sair':
+                        pygame.quit()
+                        sys.exit()
+                    historico.append([entrada_usuario,[255,255,0]])
                     offset = len(historico) * 25
-                    # janelinha = tk.Tk()
-                    # janelinha.title("Jogo de Texto")
-                    # janelinha.mainloop()
-                    # Historia(entrada_usuario)
-                    verificarInput(level1, entrada_usuario)
+                    offset = verificarInput(level1, entrada_usuario, offset)
                     entrada_usuario = ""
                 else:
                     offset, entrada_usuario = teclas(evento, altura, historico, entrada_usuario, offset)
@@ -43,13 +40,13 @@ def main():
 
         janela.fill(cor_fundo)
 
-
         y = altura - 70 - offset
         for linha in historico:
             exibir_texto(linha, y)
             y += 25
 
-        exibir_texto(">>> " + entrada_usuario, y)
+        # exibir_texto([(""),[0, 255, 0]], y)
+        exibir_texto([">>> " + entrada_usuario,[0, 255, 0]], y)
         pygame.display.flip()
 
 if __name__ == "__main__":
