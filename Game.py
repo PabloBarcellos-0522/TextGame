@@ -6,6 +6,9 @@ from Janela import *
 from Historia import *
 from Teclas import *
 
+# comando para criar executavel pelo terminal: pyinstaller -F -W Game.py
+# comando melhor: pyinstaller --noconsole --name="Executador de Projetos" --icon="NomeDoIcone.ico" --add-data="NomeDoIcone.ico;." --onefile main.py 
+
 # Inicializa o pygame
 pygame.init()
 
