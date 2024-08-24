@@ -18,6 +18,7 @@ cor_fundo = (0, 0, 0)
 # Função principal
 def main():
     entrada_usuario = ""
+    seta = 0
     y = 10
     offset = 0
 
@@ -51,7 +52,13 @@ def main():
             y += 25
 
         # exibir_texto([(""),[0, 255, 0]], y)
-        exibir_texto([">>> " + entrada_usuario,[0, 255, 0]], y)
+        seta += 1
+        if seta>500:
+            exibir_texto([">>> " + entrada_usuario +"|",[0, 255, 0]], y)
+            if seta >= 1000:
+                seta = 0
+        else:
+            exibir_texto([">>> " + entrada_usuario,[0, 255, 0]], y)
         pygame.display.flip()
 
 if __name__ == "__main__":
