@@ -35,8 +35,6 @@ level2 = {
     
 }
 
-print(level1.keys())
-
 def verificarInput(level, entrada_usuario, offset):
     for key in level.keys():
         if entrada_usuario == key and level.get(key)[1]:
