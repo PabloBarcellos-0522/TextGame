@@ -1,17 +1,19 @@
-from BancoDeDados import *
+from Dados.BancoDeDados import *
 import datetime
 import json
 
 class Player:
-    def __init__(self, nome, genero):
+    def __init__(self, nome, genero, ID):
         criarTabela()
         self.nome = nome
         if genero == 1:
             self.genero = True
         elif genero == 0: 
             self.genero = False
-        self.ID = int(''.join(map(str, 
-                inserirInf(None, nome, self.genero, None, datetime.datetime.now()
+        self.ID = ID
+
+        int(''.join(map(str, 
+                inserirInf(self.ID, nome, self.genero, None, datetime.datetime.now()
         )))) 
         self.level = 0
         self.ultimoDialogo = ""
@@ -42,7 +44,15 @@ class SlotSave:
         self.roupas = False
         self.key2 = False
         self.macaneta = False
-        self.montarPlayer()
+        try:
+            self.montarPlayer()
+        except:
+            Player("None", True, ID)
+        finally:
+            self.montarPlayer()
+            print("Aleluia")
+            print(self.ID)
+            print(self.nome)
 
     def salvar(self):
         self.atributos = [getattr(self, atributo) for atributo in dir(self) 
@@ -65,5 +75,5 @@ class SlotSave:
             index += 1
         
 # save1 = Player("Maria", 0)
-save1 = SlotSave(6)
-mostarRegistros()
+# save1 = SlotSave(6)
+# mostarRegistros()

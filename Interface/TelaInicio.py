@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+from Dados.Jogador import *
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Janela import *
 
@@ -27,6 +28,8 @@ efeito_sonoro.set_volume(1)
 botaoHover2 = pygame.mixer.Sound('Interface/Sons/mouse-click.mp3')
 botaoHover = pygame.mixer.Sound('Interface/Sons/hover.mp3')
 
+
+
 def TelaInicial():
     
     fade_alpha = 255
@@ -52,13 +55,17 @@ def TelaInicial():
         pygame.display.update()
         time.sleep(0.03)
     time.sleep(3)
-    condicao = True
+    
     a = (0,0)
+    
+    condicao = True
     while condicao:
         if fade_alpha > 0:
             fade_alpha -= 0.5
         else:
-            botoes()
+            condicao = False
+            return botoes()
+            # condicao = False
 
         fade_img.set_alpha(fade_alpha)
         janela.fill((0, 0, 0))  # Preenche a tela com preto antes de desenhar o fade
@@ -80,19 +87,22 @@ def TelaInicial():
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_RETURN:
                     janela.fill((255, 255, 255))
-                    # condicao = False
-            elif evento.type == pygame.MOUSEBUTTONDOWN:
-                if button_rect.collidepoint(evento.pos):
-                    print("Botão 1 clicado!")
-                elif button_rect2.collidepoint(evento.pos):
-                    print("Botão 2 clicado!")
-                elif button_rect3.collidepoint(evento.pos):
-                    print("Botão 3 clicado!")
+                    
+            # elif evento.type == pygame.MOUSEBUTTONDOWN:
+            #     if button_rect.collidepoint(evento.pos):
+            #         print("Botão 1 clicado!")
+            #         condicao = False
+            #     elif button_rect2.collidepoint(evento.pos):
+            #         print("Botão 2 clicado!")
+            #         condicao = False
+            #     elif button_rect3.collidepoint(evento.pos):
+            #         print("Botão 3 clicado!")
+            #         condicao = False
 
-        mouse_pos = pygame.mouse.get_pos()
-        for numero in [button_rect, button_rect2, button_rect3]:
-            if numero.collidepoint(mouse_pos) != numero.collidepoint(a):
-                botaoHover.play()
+        # mouse_pos = pygame.mouse.get_pos()
+        # for numero in [button_rect, button_rect2, button_rect3]:
+        #     if numero.collidepoint(mouse_pos) and not numero.collidepoint(a):
+        #         botaoHover.play()
 
         pygame.display.flip()
 
@@ -110,19 +120,28 @@ def botoes():
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if button_rect.collidepoint(evento.pos):
                     print("Botão 1 clicado!")
+                    running = False
+                    Dados_jogador = SlotSave(1)
+                    return Dados_jogador
                 elif button_rect2.collidepoint(evento.pos):
                     print("Botão 2 clicado!")
+                    Dados_jogador = SlotSave(2)
+                    running = False
+                    return Dados_jogador
                 elif button_rect3.collidepoint(evento.pos):
                     print("Botão 3 clicado!")
+                    Dados_jogador = SlotSave(3)
+                    running = False
+                    return Dados_jogador
                 
 
         # Detecta se o mouse está sobre o botão
         mouse_pos = pygame.mouse.get_pos()
         for button in [button_rect, button_rect2, button_rect3]:
-            if button.collidepoint(mouse_pos) != button.collidepoint(a):
+            # if button.collidepoint(mouse_pos) != button.collidepoint(a):
+            #     botaoHover.play()
+            if button.collidepoint(mouse_pos) and not button.collidepoint(a):
                 botaoHover.play()
-        #     if button.collidepoint(mouse_pos) and not button.collidepoint(a):
-        #         botaoHover.play()
         a = mouse_pos
 
         pygame.display.flip()

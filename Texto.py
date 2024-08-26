@@ -2,7 +2,7 @@ from Janela import *
 import pygame
 pygame.init()
 
-historico = [["Você está em uma sala escura. Há uma porta à sua frente.",[255, 255, 255]]]
+historico = [["Você acorda num quarto, no seu lado tem um criado-mudo que em cima tem uma foto de uma menina ao lado de uma homem.",[255, 255, 255]]]
 fonte = pygame.font.Font(None, 25) # tamanho do texto
 cor_texto = (255, 255, 255) # cor do texto
 

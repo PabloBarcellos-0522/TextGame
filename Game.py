@@ -6,7 +6,8 @@ from Janela import *
 from Historia import *
 from Teclas import *
 from Interface.TelaInicio import *
-# comando para criar executavel pelo terminal: pyinstaller -F -W Game.py
+from Dados.Jogador import *
+# comando para criar executavel pelo terminal: pyinstaller -F -w Game.py
 # comando melhor: pyinstaller --noconsole --name="Executador de Projetos" --icon="NomeDoIcone.ico" --add-data="NomeDoIcone.ico;." --onefile main.py 
 
 # Inicializa o pygame
@@ -22,10 +23,11 @@ def main():
     y = 10
     offset = 0
 
+    TelaInicial()
+    # player = TelaInicial()
    # Programa
     while True:
 
-        TelaInicial()
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 pygame.quit()
